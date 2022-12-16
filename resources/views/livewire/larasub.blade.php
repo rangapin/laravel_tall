@@ -1,7 +1,7 @@
-<div class="flex flex-col bg-indigo-900 w-full h-screen"
+<div class="flex flex-col bg-gray-900 w-full h-screen"
             x-data="{
-            showSubscribe: false,
-            showSuccess: false,
+            showSubscribe: @entangle('showSubscribe'),
+            showSuccess: @entangle('showSuccess'),
         }">
 
     <nav class="flex pt-5 justify-between container mx-auto text-indigo-200">
@@ -23,34 +23,42 @@
 
         <div class="flex flex-col w-1/3 items-start">
 
-            <h1 class="text-white font-bold text-5xl leading-tight mb-4">Landing page to subscribe</h1>
+            <h1 class="text-white font-bold text-5xl leading-tight mb-4">Tailwind | Alpine | Laravel & Livewire</h1>
 
-            <p class="text-indigo-200 text-xl mb-10">We are just checking the
-                <span class="font-bold underline">TALL</span> stack. Join the fun!</p>
+            <p class="text-indigo-200 text-xl mb-10">Discover the power of the
+                <span class="font-bold underline">TALL</span> stack.</p>
 
-            <x-danger-button class="py-3 px-8 bg-red-500 hover:bg-red-200"
-            x-on:click="showSubscribe = true">SUBSCRIBE</x-danger-button>
+            <x-danger-button class="py-3 px-8 bg-red-500 hover:bg-red-200 font-bold"
+            x-on:click="showSubscribe = true">SUBSCRIBE NOW</x-danger-button>
         </div>
 
     </div>
 
-    <x-modal class="bg-pink-500" trigger="showSubscribe">
+    <x-modal class="bg-red-500" trigger="showSubscribe">
 
-        <p class="text-white text-5xl font-extrabold text-center mt-6">Let's do it</p>
-
-        <form class="flex flex-col items-center p-24"
+        <p class="text-white text-3xl font-extrabold text-center mt-12">Enter your email below</p>
+        <form class="flex flex-col items-center p-14"
         wire:submit.prevent="subscribe">
 
-            <x-text-input class="px-5 py-3 w-80 border border-blue-400"
+            <x-text-input class="px-3 py-3 w-80 border border-blue-400"
             type="email"
             name="email"
             placeholder="Email Address"
             wire:model="email"></x-text-input>
 
-            <span class="text-gray-100 text-xs pt-3 font-bold">We will send you a confirmation e-mail</span>
+            <span class="text-gray-100 text-md pt-10 font-bold">
+            {{
+                    $errors->has('email')
+                    ? $errors->first('email')
+                    : 'We will send you a confirmation email.'
+                }}
+           </span>
 
             <x-secondary-button class="px-5 py-4 mt-5 w-80 bg-blue-500 justify-center"
-            wire:click="subscribe">Get In</x-secondary-button>
+            wire:click="subscribe">
+            <span class="animate-spin" wire:loading wire:target="subscribe">&#9696</span>
+<span wire:loading.remove wire:target="subscribe">Get In</span>
+        </x-secondary-button>
         </form>
 
     </x-modal>
@@ -59,9 +67,17 @@
 
         <p class="animate-pulse text-white text-9xl font-extrabold text-center mt-8">&check;</p>
 
-        <p class="text-white text-5xl font-extrabold text-center mt-1">Great!</p>
+        <p class="text-white text-5xl font-extrabold text-center mt-1"></p>
 
-        <p class="text-white text-3xl text-center mt-4">See you in your inbox!</p>
+@if (request()->has('verified') && request()->verified == 1)
+
+        <p class="text-white text-3xl text-center mt-4">Thanks for confirming!</p>
+
+@else
+
+        <p class="text-white text-3xl text-center mt-4">Please check your inbox!</p>
+
+@endif
 
     </x-modal>
 </div>
