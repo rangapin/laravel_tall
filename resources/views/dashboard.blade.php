@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                 <p class="text-2xl text-gray-600 font-bold-mb-6 underline">Actions</p>
                 <ul class="list-disc pl-5">
-                    <li class="text-blue-500 hover:underline"><a href="{{ route('subscribers.all') }}">Manage Subscribers</a></li>
+                    <li class="text-blue-500 hover:underline mt-5 text-xl"><a href="{{ route('subscribers.all') }}">Manage Subscribers</a></li>
                 </ul>
             </div>
             </div>
