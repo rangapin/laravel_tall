@@ -1,6 +1,7 @@
 @props(['trigger'])
 
-<div class="flex fixed top-0 bg-gray-900 bg-opacity-60 items-center w-full h-full display: none;
+
+<div class="flex fixed top-0 bg-gray-900 bg-opacity-60 items-center w-full h-full display:none;
 "
     x-show="{{ $trigger }}"
     x-on:click.self="{{ $trigger }} = false"
@@ -10,3 +11,5 @@
             {{ $slot }}
     </div>
 </div>
+
+

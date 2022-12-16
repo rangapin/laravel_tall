@@ -75,7 +75,7 @@
 
 @else
 
-        <p class="text-white text-3xl text-center mt-4">Please check your inbox!</p>
+        <p class="text-white text-3xl text-center mt-4">Thank you! You have subscribed successfully!</p>
 
 @endif
 
