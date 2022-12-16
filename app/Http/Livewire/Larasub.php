@@ -36,6 +36,7 @@ class Larasub extends Component
         ]);
 
         $notification = new VerifyEmail;
+
         $notification->createUrlUsing(function($notifiable) {
             return URL::temporarySignedRoute(
                 'subscribers.verify',
@@ -47,6 +48,7 @@ class Larasub extends Component
         });
 
         $subscriber->notify($notification);
+
     }, $deadlockRestries = 5);
 
     $this->reset('email');
